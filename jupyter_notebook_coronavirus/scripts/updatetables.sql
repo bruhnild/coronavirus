@@ -600,6 +600,75 @@ NATURAL JOIN classes
 ORDER BY gueris_n_classe, gueris) b
 WHERE a.gueris = b.gueris;
 
+--- Schema : sante
+--- Table : opencovid19fr départements
+--- Traitement : Mise à jour du champ depistes_n_classe
+
+UPDATE sante.opencovid19fr a
+SET depistes_n_classe = b.depistes_n_classe
+FROM 
+(WITH jenks AS
+    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 6) OVER (
+      ORDER BY depistes DESC) AS depistes_classe,
+             depistes
+     FROM
+        (WITH max_date AS
+    (SELECT DISTINCT ON (maille_code) maille_code,
+                        max(date_actualisation)date_actualisation
+     FROM sante.opencovid19fr
+     WHERE granularite IN ('departement','collectivite-outremer')
+     GROUP BY maille_code
+     ORDER BY maille_code)
+  SELECT maille_nom,
+       a.date_actualisation::varchar,
+                   gid,
+                   granularite,
+                   CASE
+                       WHEN granularite IN('departement') THEN split_part(a.maille_code, '-', 2)
+                       WHEN granularite IN('collectivite-outremer') THEN split_part(a.maille_code, '-', 2)
+                       ELSE a.maille_code
+                   END AS maille_code,
+                   confirmes,
+                   deces,
+                   reanimation,
+                   hospitalises,
+                   gueris,
+                   depistes,
+                   source_nom,
+                   source_url,
+                   source_type,
+                   latitude,
+                   longitude,
+  hospitalises_n_classe,
+  deces_n_classe, 
+  reanimation_n_classe,
+  depistes_n_classe,
+  gueris_n_classe ,
+  depistes_n_classe ,
+                   geom
+FROM max_date a
+JOIN sante.opencovid19fr b ON a.maille_code = b.maille_code
+AND a.date_actualisation = b.date_actualisation
+AND geom IS NOT NULL
+ORDER BY maille_nom)b ) ,
+     classes AS
+    (SELECT depistes_classe,
+            row_number() OVER (
+                               ORDER BY min_depistes) AS depistes_n_classe
+     FROM --on ordonne les classes par leur valeur min
+
+         (SELECT depistes_classe,
+                 min(depistes) min_depistes
+          FROM jenks
+          GROUP BY depistes_classe) AS subreq )
+SELECT depistes,
+       depistes_n_classe
+FROM jenks --natural joint fait une jointure sur toutes
+-- les colonnes de A & B ayant les mêmes noms.
+-- ici : classe
+NATURAL JOIN classes
+ORDER BY depistes_n_classe, depistes) b
+WHERE a.depistes = b.depistes;
 
 --- Schema : sante
 --- Table : opencovid19fr régions
@@ -938,6 +1007,75 @@ FROM jenks --natural joint fait une jointure sur toutes
 NATURAL JOIN classes
 ORDER BY gueris_n_classe, gueris) b
 WHERE a.gueris = b.gueris;
+
+--- Schema : sante
+--- Table : opencovid19fr régions
+--- Traitement : Mise à jour du champ depistes_n_classe
+
+UPDATE sante.opencovid19fr a
+SET depistes_n_classe = b.depistes_n_classe
+FROM 
+(WITH jenks AS
+    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 6) OVER (
+      ORDER BY depistes DESC) AS depistes_classe,
+             depistes
+     FROM
+        (WITH max_date AS
+    (SELECT DISTINCT ON (maille_code) maille_code,
+                        max(date_actualisation)date_actualisation
+     FROM sante.opencovid19fr
+     WHERE granularite IN ('region')
+     GROUP BY maille_code
+     ORDER BY maille_code )
+SELECT maille_nom,
+       a.date_actualisation::varchar,
+       gid,
+       granularite,
+       CASE
+           WHEN granularite IN('region') THEN split_part(a.maille_code, '-', 2)
+           ELSE a.maille_code
+       END AS maille_code,
+       confirmes,
+       deces,
+       reanimation,
+       hospitalises,
+       gueris,
+       depistes,
+       source_nom,
+       source_url,
+       source_type,
+       latitude,
+       longitude,
+       confirmes_n_classe,
+       deces_n_classe,
+       reanimation_n_classe,
+       hospitalises_n_classe,
+       gueris_n_classe,
+       depistes_n_classe,
+       geom
+FROM max_date a
+JOIN sante.opencovid19fr b ON a.maille_code = b.maille_code
+AND a.date_actualisation = b.date_actualisation
+AND geom IS NOT NULL
+ORDER BY maille_nom)b ) ,
+     classes AS
+    (SELECT depistes_classe,
+            row_number() OVER (
+                               ORDER BY min_depistes) AS depistes_n_classe
+     FROM --on ordonne les classes par leur valeur min
+
+         (SELECT depistes_classe,
+                 min(depistes) min_depistes
+          FROM jenks
+          GROUP BY depistes_classe) AS subreq )
+SELECT depistes,
+       depistes_n_classe
+FROM jenks --natural joint fait une jointure sur toutes
+-- les colonnes de A & B ayant les mêmes noms.
+-- ici : classe
+NATURAL JOIN classes
+ORDER BY depistes_n_classe, depistes) b
+WHERE a.depistes = b.depistes;
 
 
 --- Schema : sante
@@ -2005,4 +2143,114 @@ FROM jenks --natural joint fait une jointure sur toutes
 NATURAL JOIN classes
 ORDER BY nbre_acte_corona_e_n_classe, nbre_acte_corona) b
 WHERE a.nbre_acte_corona = b.nbre_acte_corona;
+
+-- --- Schema : sante
+-- --- Table : caresteouvert régions
+-- --- Traitement : Mise à jour du champ de géométrie
+-- UPDATE sante.caresteouvert SET geom = st_setsrid(st_makepoint(latitude, longitude),4326);
+
+-- --- Schema : sante
+-- --- Table : caresteouvert régions
+-- --- Traitement : Ne garde que les poi dans l'emprise de Toulouse
+
+-- DELETE FROM sante.caresteouvert
+-- WHERE geom NOT IN (SELECT a.geom  FROM sante.caresteouvert a
+-- JOIN administratif.toulouse b ON ST_INTERSECTS (a.geom,
+-- (st_transform(b.geom, 4326) ) ))
+
+-- --- Schema : sante
+-- --- Table : caresteouvert 
+-- --- Traitement : Mise à jour du champ categorie
+
+-- UPDATE sante.caresteouvert
+-- SET categorie = 
+-- CASE 
+-- WHEN category LIKE 'beverages' THEN 'Caviste' 
+-- WHEN category LIKE 'hardware' THEN 'Quincaillerie' 
+-- WHEN category LIKE 'frozen_food' THEN 'Vente de surgelés' 
+-- WHEN category LIKE 'tyres' THEN 'Garage' 
+-- WHEN category LIKE 'laundry' THEN 'Laverie' 
+-- WHEN category LIKE 'hairdresser' THEN 'Coiffeur' 
+-- WHEN category LIKE 'newsagent' THEN 'Papeterie' 
+-- WHEN category LIKE 'supermarket' THEN 'Supermarché' 
+-- WHEN category LIKE 'insurance' THEN 'Assureur' 
+-- WHEN category LIKE 'electronics_repair' THEN 'Magasin de bricolage' 
+-- WHEN category LIKE 'butcher' THEN 'Boucher' 
+-- WHEN category LIKE 'marketplace' THEN 'Marché' 
+-- WHEN category LIKE 'greengrocer' THEN 'Vente de fruits et légumes' 
+-- WHEN category LIKE 'car_repair' THEN 'Garage' 
+-- WHEN category LIKE 'chemist' THEN 'Pharmacies' 
+-- WHEN category LIKE 'kiosk' THEN 'Papeterie' 
+-- WHEN category LIKE 'wine' THEN 'Caviste' 
+-- WHEN category LIKE 'employment_agency' THEN 'Agence de travail temporaire' 
+-- WHEN category LIKE 'pharmacy' THEN 'Pharmacies' 
+-- WHEN category LIKE 'bakery' THEN 'Boulangeries' 
+-- WHEN category LIKE 'stationery' THEN 'Papeterie' 
+-- WHEN category LIKE 'police' THEN 'Commissariat' 
+-- WHEN category LIKE 'tobacco' THEN 'Vente de tabac' 
+-- WHEN category LIKE 'car' THEN 'Garage' 
+-- WHEN category LIKE 'company' THEN 'Société' 
+-- WHEN category LIKE 'fishing' THEN 'Vente de fruits de mer' 
+-- WHEN category LIKE 'car_rental' THEN 'Location de voiture' 
+-- WHEN category LIKE 'electronics' THEN 'Magasin de bricolage' 
+-- WHEN category LIKE 'gas' THEN 'Stations essence' 
+-- WHEN category LIKE 'computer' THEN 'Magasin d''informatique' 
+-- WHEN category LIKE 'fuel' THEN 'Stations essence' 
+-- WHEN category LIKE 'convenience' THEN 'Supérette' 
+-- WHEN category LIKE 'car_parts' THEN 'Magasin de bricolage' 
+-- WHEN category LIKE 'alcohol' THEN 'Caviste' 
+-- WHEN category LIKE 'pet' THEN 'Animalerie' 
+-- WHEN category LIKE 'mobile_phone' THEN 'Magasin de téléphonie' 
+-- WHEN category LIKE 'optician' THEN 'Opticien' 
+-- WHEN category LIKE 'bank' THEN 'Banque' 
+-- WHEN category LIKE 'financial' THEN 'Finance' 
+-- WHEN category LIKE 'funeral_directors' THEN 'Services funéraires' 
+-- WHEN category LIKE 'post_office' THEN 'Bureau de poste' 
+-- WHEN category LIKE 'bicycle' THEN 'Magasin de vente et de réparation de vélos' 
+-- WHEN category LIKE 'variety_store' THEN 'Supérette'
+-- END;
+
+-- --- Schema : sante
+-- --- Table : caresteouvert 
+-- --- Traitement : Mise à jour du champ categorie_regroupee
+
+
+-- UPDATE sante.caresteouvert
+-- SET categorie_regroupee = 
+-- CASE 
+-- WHEN categorie LIKE 'Laverie' THEN 'Commerces'
+-- WHEN categorie LIKE 'Banque' THEN 'Banques et assurances'
+-- WHEN categorie LIKE 'Commissariat' THEN 'Commissariat'
+-- WHEN categorie LIKE 'Marché' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Magasin de bricolage' THEN 'Commerces'
+-- WHEN categorie LIKE 'Assureur' THEN 'Banques et assurances'
+-- WHEN categorie LIKE 'Finance' THEN 'Banques et assurances'
+-- WHEN categorie LIKE 'Magasin de vente et de réparation de vélos' THEN 'Commerces'
+-- WHEN categorie LIKE 'Supérette' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Pharmacies' THEN 'Pharmacie'
+-- WHEN categorie LIKE 'Magasin d''informatique' THEN 'Commerces'
+-- WHEN categorie LIKE 'Coiffeur' THEN 'Commerces'
+-- WHEN categorie LIKE 'Caviste' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Services funéraires' THEN 'Services funéraires'
+-- WHEN categorie LIKE 'Supermarché' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Stations essence' THEN 'Stations services'
+-- WHEN categorie LIKE 'Boucher' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Société' THEN 'Commerces'
+-- WHEN categorie LIKE 'Vente de surgelés' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Papeterie' THEN 'Commerces'
+-- WHEN categorie LIKE 'Vente de fruits de mer' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Magasin de téléphonie' THEN 'Commerces'
+-- WHEN categorie LIKE 'Garage' THEN 'Commerces'
+-- WHEN categorie LIKE 'Location de voiture' THEN 'Commerces'
+-- WHEN categorie LIKE 'Vente de tabac' THEN 'Commerces'
+-- WHEN categorie LIKE 'Opticien' THEN 'Commerces'
+-- WHEN categorie LIKE 'Quincaillerie' THEN 'Commerces'
+-- WHEN categorie LIKE 'Bureau de poste' THEN 'Bureaux de poste'
+-- WHEN categorie LIKE 'Animalerie' THEN 'Commerces'
+-- WHEN categorie LIKE 'Vente de fruits et légumes' THEN 'Alimentation'
+-- WHEN categorie LIKE 'Boulangeries' THEN 'Boulangeries'
+-- WHEN categorie LIKE 'Agence de travail temporaire' THEN 'Commerces'
+-- END
+
+
 
