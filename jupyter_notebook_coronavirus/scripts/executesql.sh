@@ -1,7 +1,8 @@
 #!/bin/sh
 
-# Lancement script sql pour import csv en base
-PGPASSWORD=ARZRc9pxe3hyIDY1KFMw psql -h visu-db.makina-corpus.net -d visumarqueblanche -U visumarqueblanche -p 5432  -f /home/mfu/Documents/Projets/coronavirus/jupyter_notebook_coronavirus/scripts/importcsv.sql
+# Lancement script sql pour import et mise à jour données en base
+for file in /home/mfu/Documents/Projets/coronavirus/jupyter_notebook_coronavirus/scripts/*.sql
+    do PGPASSWORD=ARZRc9pxe3hyIDY1KFMw  psql -h visu-db.makina-corpus.net -d visumarqueblanche -U visumarqueblanche -p 5432  -f $file
+done
 
-# Lancement script sql préparation des données en base
-PGPASSWORD=ARZRc9pxe3hyIDY1KFMw psql -h visu-db.makina-corpus.net -d visumarqueblanche -U visumarqueblanche -p 5432  -f /home/mfu/Documents/Projets/coronavirus/jupyter_notebook_coronavirus/scripts/updatetables.sql
+# PGPASSWORD=ARZRc9pxe3hyIDY1KFMw  psql -h visu-db.makina-corpus.net -d visumarqueblanche -U visumarqueblanche -p 5432  -f 70_createupdate_caresteouvert.sql
