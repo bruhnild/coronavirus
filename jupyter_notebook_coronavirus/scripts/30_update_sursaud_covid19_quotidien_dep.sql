@@ -58,7 +58,7 @@ geom
 FROM sante.sursaud_covid19_quotidien_dep a
 JOIN datemax b ON a.code_dep = b.code_dep 
 AND a.date_actualisation = b.date_actualisation
-AND geom IS NOT NULL)b ) ,
+AND geom IS NOT NULL and sursaud_cl_age_corona = '0')b ) ,
      classes AS
     (SELECT nbre_pass_corona_classe,
             row_number() OVER (
@@ -115,7 +115,7 @@ geom
 FROM sante.sursaud_covid19_quotidien_dep a
 JOIN datemax b ON a.code_dep = b.code_dep 
 AND a.date_actualisation = b.date_actualisation
-AND geom IS NOT NULL)b ) ,
+AND geom IS NOT NULL and sursaud_cl_age_corona = '0')b ) ,
      classes AS
     (SELECT nbre_hospit_corona_classe,
             row_number() OVER (
@@ -172,7 +172,7 @@ geom
 FROM sante.sursaud_covid19_quotidien_dep a
 JOIN datemax b ON a.code_dep = b.code_dep 
 AND a.date_actualisation = b.date_actualisation
-AND geom IS NOT NULL)b ) ,
+AND geom IS NOT NULL and sursaud_cl_age_corona = '0')b ) ,
      classes AS
     (SELECT nbre_acte_corona_classe,
             row_number() OVER (

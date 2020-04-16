@@ -10,58 +10,16 @@ Modification : Nom : ///// - Date : date_de_modif - Motif/nature : //////
 
 -- Schema : sante
 --- Table : donneeshospitalierescovid19
---- Traitement : Ajout champs
-
-ALTER TABLE sante.donneeshospitalierescovid19 
-ADD nom_dep VARCHAR;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN rea_variation INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN rad_variation INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN hosp_variation INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN dc_variation INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN rea_variation_n_classe INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN rad_variation_n_classe INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN hosp_variation_n_classe INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN dc_variation_n_classe INTEGER;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_hosp INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_rea INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_rad INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_dc INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_hosp_n_classe INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_rea_n_classe INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_rad_n_classe INTEGER ;
-ALTER TABLE sante.donneeshospitalierescovid19
-ADD COLUMN tx_dc_n_classe INTEGER ;
-
--- Schema : sante
---- Table : donneeshospitalierescovid19
 --- Traitement : Mise à jour de la géométrie
 
 UPDATE sante.donneeshospitalierescovid19 a
-SET (geom,
-     latitude,
-     longitude) = (b.geom,
-                   st_x(b.geom),
-                   st_y(b.geom))
+SET (geom, nom_dep) = (b.geom, b.nom_dep)
 FROM
 
          (SELECT 
          a.gid,
          a.dep,
+         b.nom_dep,
          b.geom
      FROM sante.donneeshospitalierescovid19 a
      JOIN administratif.chefs_lieux_dep b 
@@ -143,25 +101,6 @@ ON a.dep = b.dep
 JOIN administratif.departements c ON a.dep = c.insee_dep)b
 WHERE a.gid = b.gid;
 
-
---- Schema : sante
---- Table : donneeshospitalierescovid19
---- Traitement : Mise à jour du champ nom_dep
-
-UPDATE sante.donneeshospitalierescovid19 a
-SET nom_dep = b.nom_dep
-FROM
-         (SELECT 
-         a.gid,
-         a.dep,
-         b.nom_dep,
-         b.geom
-     FROM sante.donneeshospitalierescovid19 a
-     JOIN administratif.chefs_lieux_dep b 
-      ON a.dep = b.insee_dep
-     )b
-WHERE a.gid = b.gid
-;
 
 --- Schema : sante
 --- Table : donneeshospitalierescovid19

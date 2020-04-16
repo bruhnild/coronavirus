@@ -1,4 +1,8 @@
-# coronavirus notebook
+# Coronavirus notebook
+
+## Prérequis:
+`sudo pip install pandas`
+
 Ce notebook permet de télécharger des jeux de données mondiaux et français :
 
 - https://coronavirus.politologue.com/data/coronavirus/coronacsv.aspx?format=csv&t=pays

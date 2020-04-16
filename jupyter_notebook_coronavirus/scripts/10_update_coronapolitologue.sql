@@ -13,11 +13,7 @@ Modification : Nom : ///// - Date : date_de_modif - Motif/nature : //////
 --- Traitement : Mise à jour de la géométrie
 
 UPDATE sante.coronapolitologue a
-SET (geom,
-     latitude,
-     longitude) = (b.geom,
-                   st_x(b.geom),
-                   st_y(b.geom))
+SET geom = b.geom
 FROM
 
          (SELECT DISTINCT 

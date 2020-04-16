@@ -40,3 +40,10 @@ TRUNCATE TABLE sante.donneeshospitalieresetablissementscovid19;
 
 \COPY sante.donneeshospitalieresetablissementscovid19(dep, jour, nb) FROM '/home/mfu/Documents/Projets/coronavirus/jupyter_notebook_coronavirus/data/sources_traitees/donnees-hospitalieres-etablissements-covid19.csv'DELIMITER ';' CSV HEADER ENCODING 'utf8' NULL '';
 
+--- Schema : sante
+--- Table : donneestestscovid19laboquotidien
+--- Traitement : Intégration csv donnees-tests-covid19-labo-quotidien en base
+TRUNCATE TABLE sante.donneestestscovid19laboquotidien;
+
+\COPY sante.donneestestscovid19laboquotidien(dep, jour, clage_covid, nb_test, nb_pos, nb_test_h, nb_pos_h, nb_test_f, nb_pos_f) FROM '/home/mfu/Documents/Projets/coronavirus/jupyter_notebook_coronavirus/data/sources_traitees/donnees-tests-covid19-labo-quotidien.csv'DELIMITER ';' CSV HEADER ENCODING 'utf8' NULL '';
+

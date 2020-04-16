@@ -12,11 +12,7 @@ Modification : Nom : ///// - Date : date_de_modif - Motif/nature : //////
 --- Traitement : Mise à jour de la géométrie pour les départements
 
 UPDATE sante.opencovid19fr a
-SET (geom,
-     latitude,
-     longitude) = (b.geom,
-                   st_x(b.geom),
-                   st_y(b.geom))
+SET geom = b.geom
 FROM
     (SELECT a.geom,
             b.gid,
@@ -43,11 +39,7 @@ WHERE a.gid = b.gid
 --- Traitement : Mise à jour de la géométrie pour les régions
 
 UPDATE sante.opencovid19fr a
-SET (geom,
-     latitude,
-     longitude) = (b.geom,
-                   st_x(b.geom),
-                   st_y(b.geom))
+SET geom = b.geom
 FROM
     (SELECT a.geom,
             b.gid,

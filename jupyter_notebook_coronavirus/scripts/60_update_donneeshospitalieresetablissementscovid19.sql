@@ -12,34 +12,9 @@ Modification : Nom : ///// - Date : date_de_modif - Motif/nature : //////
 --- Traitement : Mise à jour de la géométrie
 
 UPDATE sante.donneeshospitalieresetablissementscovid19 a
-SET (geom,
-     latitude,
-     longitude) = (b.geom,
-                   st_x(b.geom),
-                   st_y(b.geom))
+SET (geom, nom_dep) = (b.geom, b.nom_dep)
 FROM
 
-         (SELECT 
-         a.gid,
-         a.dep,
-         b.geom
-     FROM sante.donneeshospitalieresetablissementscovid19 a
-     JOIN administratif.chefs_lieux_dep b 
-      ON a.dep = b.insee_dep
-     )b
-WHERE a.gid = b.gid
-
-;
-
---- Schema : sante
---- Table : donneeshospitalieresetablissementscovid19
---- Traitement : Ajout et mise à jour du champ nom_dep
-
-ALTER TABLE sante.donneeshospitalieresetablissementscovid19 
-ADD nom_dep VARCHAR;
-UPDATE sante.donneeshospitalieresetablissementscovid19 a
-SET nom_dep = b.nom_dep
-FROM
          (SELECT 
          a.gid,
          a.dep,
@@ -50,11 +25,12 @@ FROM
       ON a.dep = b.insee_dep
      )b
 WHERE a.gid = b.gid
+
 ;
 
 
 --- Schema : sante
---- Table : donneeshospitalieresetablissementscovid19 régions
+--- Table : donneeshospitalieresetablissementscovid19
 --- Traitement : Mise à jour du champ nb_n_classe
 
 UPDATE sante.donneeshospitalieresetablissementscovid19 a
