@@ -26,7 +26,7 @@ Se positionner dans le dossier du jupyter notebook:
 ### Lieux ouverts ou fermés pendant le confinement Covid-19 
 - https://www.data.gouv.fr/fr/datasets/lieux-ouverts-ou-fermes-pendant-le-confinement-covid-19/
 
-# Commande pour exécuter exécuter le notebook
+## Commande pour exécuter exécuter le notebook
 `runipy coronavirus.ipynb`
 
 ## Lancer et sauvegarder le notebook dans un nouveau notebook

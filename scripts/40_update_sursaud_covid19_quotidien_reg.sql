@@ -9,13 +9,22 @@ Modification : Nom : ///// - Date : date_de_modif - Motif/nature : //////
 */
 --- Schema : sante
 --- Table : sursaud_covid19_quotidien_reg
+--- Traitement : Mise à jour du champ code_reg
+
+UPDATE sante.sursaud_covid19_quotidien_reg
+SET code_reg = CASE
+                   WHEN LENGTH(code_reg) <2 THEN concat('0',code_reg)
+                   ELSE code_reg
+               END;
+--- Schema : sante
+--- Table : sursaud_covid19_quotidien_reg
 --- Traitement : Mise à jour de la géométrie pour les régions
 
 UPDATE sante.sursaud_covid19_quotidien_reg a
 SET geom = b.geom
 FROM
 (
-SELECT code_reg, a.geom
+SELECT DISTINCT code_reg, a.geom
 FROM administratif.chefs_lieux_dep a
 JOIN sante.sursaud_covid19_quotidien_reg b ON a.insee_reg = b.code_reg
      )b
