@@ -3,6 +3,8 @@
 ## Prérequis:
 Se positionner dans le dossier du jupyter notebook:
 `conda create --name my_env python=3`
+`conda activate my_env`
+
 `pip install pandas`
 `pip install xlrd`
 `pip install SQLAlchemy`
