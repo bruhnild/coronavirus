@@ -2,13 +2,14 @@
 
 ## Prérequis:
 Se positionner dans le dossier du jupyter notebook:
-`conda create --name my_env python=3`
-`conda activate my_env`
-
-`pip install pandas`
-`pip install xlrd`
-`pip install SQLAlchemy`
-`pip install psycopg2`
+### Créer et activer l'environnement conda :
+- `conda create --name my_env python=3`
+- `conda activate my_env`
+### Installer les paquets suivants:
+- `pip install pandas`
+- `pip install xlrd`
+- `pip install SQLAlchemy`
+- `pip install psycopg2`
 
 ## Ce notebook permet de télécharger des jeux de données mondiaux et français :
 
@@ -22,7 +23,7 @@ Se positionner dans le dossier du jupyter notebook:
 - https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/#_
 ### Données relatives aux tests de dépistage de COVID-19 réalisés en laboratoire de ville
 - https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-tests-de-depistage-de-covid-19-realises-en-laboratoire-de-ville
-# Lieux ouverts ou fermés pendant le confinement Covid-19 
+### Lieux ouverts ou fermés pendant le confinement Covid-19 
 - https://www.data.gouv.fr/fr/datasets/lieux-ouverts-ou-fermes-pendant-le-confinement-covid-19/
 
 # Commande pour exécuter exécuter le notebook
