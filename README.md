@@ -1,17 +1,32 @@
-# Coronavirus notebook
+<h1 align="center">
+  Coronavirus notebook
+</h1>
 
-## Prérequis:
-Se positionner dans le dossier du jupyter notebook:
-### Créer et activer l'environnement conda :
-- `conda create --name my_env python=3`
-- `conda activate my_env`
-### Installer les paquets suivants:
-- `pip install pandas`
-- `pip install xlrd`
-- `pip install SQLAlchemy`
-- `pip install psycopg2`
+## Pour commencer
+### Prérequis
 
-## Ce notebook permet de télécharger des jeux de données mondiaux et français :
+Pour travailler sur ce projet il faut installer:
+
+- python 3
+- conda
+- jupyter notebook
+
+Se positionner à la racine du projet :
+- créer et activer un environnement conda :
+
+```sh
+$ conda create --name my_env python=3
+$ conda activate my_env
+```
+- installer les paquets suivants :
+
+```sh
+$ pip install pandas
+$ pip install xlrd
+$ pip install SQLAlchemy
+$ pip install psycopg2
+```
+## Ce notebook permet de télécharger et exploiter les jeux de données suivants:
 
 ### CoronaVirus (Covid19) - Evolution par pays et dans le monde (maj quotidienne)
 - https://www.data.gouv.fr/fr/datasets/coronavirus-covid19-evolution-par-pays-et-dans-le-monde-maj-quotidienne/
@@ -26,8 +41,12 @@ Se positionner dans le dossier du jupyter notebook:
 ### Lieux ouverts ou fermés pendant le confinement Covid-19 
 - https://www.data.gouv.fr/fr/datasets/lieux-ouverts-ou-fermes-pendant-le-confinement-covid-19/
 
-## Commande pour exécuter exécuter le notebook
-`runipy coronavirus.ipynb`
-
-## Lancer et sauvegarder le notebook dans un nouveau notebook
-`runipy coronavirus.ipynb coronavirus_output.ipynb`
+## Lignes de commande pour exécuter le notebook
+### avec l'interface jupyter notebook
+```sh
+$ jupyter notebook
+```
+### avec runpy
+```sh
+$ runipy coronavirus.ipynb
+```
