@@ -47,3 +47,10 @@ TRUNCATE TABLE sante.donneestestscovid19laboquotidien;
 
 \COPY sante.donneestestscovid19laboquotidien(dep, jour, clage_covid, nb_test, nb_pos, nb_test_h, nb_pos_h, nb_test_f, nb_pos_f) FROM '/home/mfu/Documents/Projets/coronavirus/data/sources_traitees/donnees-tests-covid19-labo-quotidien.csv'DELIMITER ';' CSV HEADER ENCODING 'utf8' NULL '';
 
+--- Schema : sante
+--- Table : transfertspatientscovid19
+--- Traitement : Intégration csv transfertspatientscovid19 en base
+TRUNCATE TABLE sante.transfertspatientscovid19;
+
+\COPY sante.transfertspatientscovid19(debut_transfert, fin_transfert, type_vecteur, region_depart, region_arrivee, pays_arrivee, nombre_patients_transferes) FROM '/home/mfu/Documents/Projets/coronavirus/data/sources_traitees/transferts-patients-covid19.csv'DELIMITER ',' CSV HEADER ENCODING 'utf8' NULL '';
+
