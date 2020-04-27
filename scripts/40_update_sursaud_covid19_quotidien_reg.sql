@@ -39,7 +39,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_n_classe = b.nbre_pass_corona_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_classe,
              nbre_pass_corona
      FROM
@@ -93,7 +93,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_n_classe = b.nbre_hospit_corona_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_classe,
              nbre_hospit_corona
      FROM
@@ -147,7 +147,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_n_classe = b.nbre_acte_corona_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_classe,
              nbre_acte_corona
      FROM
@@ -209,7 +209,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_a_n_classe = b.nbre_pass_corona_a_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_classe,
              nbre_pass_corona
      FROM
@@ -255,7 +255,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_a_n_classe = b.nbre_hospit_corona_a_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_classe,
              nbre_hospit_corona
      FROM
@@ -300,7 +300,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_a_n_classe = b.nbre_acte_corona_a_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_classe,
              nbre_acte_corona
      FROM
@@ -345,7 +345,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_b_n_classe = b.nbre_pass_corona_b_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_classe,
              nbre_pass_corona
      FROM
@@ -395,7 +395,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_b_n_classe = b.nbre_hospit_corona_b_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_classe,
              nbre_hospit_corona
      FROM
@@ -440,7 +440,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_b_n_classe = b.nbre_acte_corona_b_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_classe,
              nbre_acte_corona
      FROM
@@ -485,7 +485,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_c_n_classe = b.nbre_pass_corona_c_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_classe,
              nbre_pass_corona
      FROM
@@ -535,7 +535,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_c_n_classe = b.nbre_hospit_corona_c_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_classe,
              nbre_hospit_corona
      FROM
@@ -580,7 +580,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_c_n_classe = b.nbre_acte_corona_c_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_classe,
              nbre_acte_corona
      FROM
@@ -625,7 +625,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_d_n_classe = b.nbre_pass_corona_d_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_dlasse,
              nbre_pass_corona
      FROM
@@ -675,7 +675,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_d_n_classe = b.nbre_hospit_corona_d_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_dlasse,
              nbre_hospit_corona
      FROM
@@ -720,7 +720,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_d_n_classe = b.nbre_acte_corona_d_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_dlasse,
              nbre_acte_corona
      FROM
@@ -765,7 +765,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_pass_corona_e_n_classe = b.nbre_pass_corona_e_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_pass_corona, 0), 5) OVER (
       ORDER BY nbre_pass_corona DESC) AS nbre_pass_corona_elasse,
              nbre_pass_corona
      FROM
@@ -812,7 +812,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_hospit_corona_e_n_classe = b.nbre_hospit_corona_e_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_hospit_corona, 0), 5) OVER (
       ORDER BY nbre_hospit_corona DESC) AS nbre_hospit_corona_elasse,
              nbre_hospit_corona
      FROM
@@ -857,7 +857,7 @@ UPDATE sante.sursaud_covid19_quotidien_reg a
 SET nbre_acte_corona_e_n_classe = b.nbre_acte_corona_e_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(nbre_acte_corona, 0), 5) OVER (
       ORDER BY nbre_acte_corona DESC) AS nbre_acte_corona_elasse,
              nbre_acte_corona
      FROM

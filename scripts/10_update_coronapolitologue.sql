@@ -103,7 +103,7 @@ UPDATE sante.coronapolitologue a
 SET confirmed_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(confirmed, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(confirmed, 0), 5) OVER (
                                                                        ORDER BY confirmed DESC) AS classe,
                  confirmed
           FROM
@@ -147,7 +147,7 @@ UPDATE sante.coronapolitologue a
 SET deaths_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(deaths, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(deaths, 0), 5) OVER (
                                                                     ORDER BY deaths DESC) AS classe,
                  deaths
           FROM
@@ -191,7 +191,7 @@ UPDATE sante.coronapolitologue a
 SET recovered_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(recovered, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(recovered, 0), 5) OVER (
                                                                        ORDER BY recovered DESC) AS classe,
                  recovered
           FROM
@@ -235,7 +235,7 @@ UPDATE sante.coronapolitologue a
 SET ratepop_confirmed_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(ratepop_confirmed, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(ratepop_confirmed, 0), 5) OVER (
                                                                        ORDER BY ratepop_confirmed DESC) AS classe,
                  ratepop_confirmed
           FROM
@@ -279,7 +279,7 @@ UPDATE sante.coronapolitologue a
 SET ratepop_deaths_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(ratepop_deaths, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(ratepop_deaths, 0), 5) OVER (
                                                                     ORDER BY ratepop_deaths DESC) AS classe,
                  ratepop_deaths
           FROM
@@ -323,7 +323,7 @@ UPDATE sante.coronapolitologue a
 SET ratepop_recovered_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(ratepop_recovered, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(ratepop_recovered, 0), 5) OVER (
                                                                        ORDER BY ratepop_recovered DESC) AS classe,
                  ratepop_recovered
           FROM
@@ -367,7 +367,7 @@ UPDATE sante.coronapolitologue a
 SET variation_confirmed_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(variation_confirmed, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(variation_confirmed, 0), 5) OVER (
                                                                        ORDER BY variation_confirmed DESC) AS classe,
                  variation_confirmed
           FROM
@@ -411,7 +411,7 @@ UPDATE sante.coronapolitologue a
 SET variation_deaths_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(variation_deaths, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(variation_deaths, 0), 5) OVER (
                                                                     ORDER BY variation_deaths DESC) AS classe,
                  variation_deaths
           FROM
@@ -455,7 +455,7 @@ UPDATE sante.coronapolitologue a
 SET variation_recovered_n_classe = b.n_classe
 FROM
     (WITH jenks AS
-         (SELECT st_clusterkmeans(st_makepoint(variation_recovered, 0), 6) OVER (
+         (SELECT st_clusterkmeans(st_makepoint(variation_recovered, 0), 5) OVER (
                                                                        ORDER BY variation_recovered DESC) AS classe,
                  variation_recovered
           FROM

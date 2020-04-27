@@ -70,7 +70,7 @@ UPDATE sante.opencovid19fr a
 SET confirmes_n_classe = b.confirmes_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(confirmes, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(confirmes, 0), 5) OVER (
       ORDER BY confirmes DESC) AS confirmes_classe,
              confirmes
      FROM
@@ -138,7 +138,7 @@ UPDATE sante.opencovid19fr a
 SET deces_n_classe = b.deces_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(deces, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(deces, 0), 5) OVER (
       ORDER BY deces DESC) AS deces_classe,
              deces
      FROM
@@ -206,7 +206,7 @@ UPDATE sante.opencovid19fr a
 SET deces_ehpad_n_classe = b.deces_ehpad_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(deces_ehpad, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(deces_ehpad, 0), 5) OVER (
       ORDER BY deces_ehpad DESC) AS deces_ehpad_classe,
              deces_ehpad
      FROM
@@ -278,7 +278,7 @@ UPDATE sante.opencovid19fr a
 SET reanimation_n_classe = b.reanimation_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(reanimation, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(reanimation, 0), 5) OVER (
       ORDER BY reanimation DESC) AS reanimation_classe,
              reanimation
      FROM
@@ -347,7 +347,7 @@ UPDATE sante.opencovid19fr a
 SET hospitalises_n_classe = b.hospitalises_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(hospitalises, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(hospitalises, 0), 5) OVER (
       ORDER BY hospitalises DESC) AS hospitalises_classe,
              hospitalises
      FROM
@@ -415,7 +415,7 @@ UPDATE sante.opencovid19fr a
 SET gueris_n_classe = b.gueris_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(gueris, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(gueris, 0), 5) OVER (
       ORDER BY gueris DESC) AS gueris_classe,
              gueris
      FROM
@@ -483,7 +483,7 @@ UPDATE sante.opencovid19fr a
 SET depistes_n_classe = b.depistes_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 5) OVER (
       ORDER BY depistes DESC) AS depistes_classe,
              depistes
      FROM
@@ -554,7 +554,7 @@ UPDATE sante.opencovid19fr a
 SET confirmes_n_classe = b.confirmes_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(confirmes, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(confirmes, 0), 5) OVER (
       ORDER BY confirmes DESC) AS confirmes_classe,
              confirmes
      FROM
@@ -621,7 +621,7 @@ UPDATE sante.opencovid19fr a
 SET deces_n_classe = b.deces_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(deces, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(deces, 0), 5) OVER (
       ORDER BY deces DESC) AS deces_classe,
              deces
      FROM
@@ -689,7 +689,7 @@ UPDATE sante.opencovid19fr a
 SET reanimation_n_classe = b.reanimation_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(reanimation, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(reanimation, 0), 5) OVER (
       ORDER BY reanimation DESC) AS reanimation_classe,
              reanimation
      FROM
@@ -757,7 +757,7 @@ UPDATE sante.opencovid19fr a
 SET hospitalises_n_classe = b.hospitalises_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(hospitalises, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(hospitalises, 0), 5) OVER (
       ORDER BY hospitalises DESC) AS hospitalises_classe,
              hospitalises
      FROM
@@ -824,7 +824,7 @@ UPDATE sante.opencovid19fr a
 SET gueris_n_classe = b.gueris_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(gueris, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(gueris, 0), 5) OVER (
       ORDER BY gueris DESC) AS gueris_classe,
              gueris
      FROM
@@ -891,7 +891,7 @@ UPDATE sante.opencovid19fr a
 SET depistes_n_classe = b.depistes_n_classe
 FROM 
 (WITH jenks AS
-    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 6) OVER (
+    ( SELECT st_clusterkmeans(st_makepoint(depistes, 0), 5) OVER (
       ORDER BY depistes DESC) AS depistes_classe,
              depistes
      FROM
