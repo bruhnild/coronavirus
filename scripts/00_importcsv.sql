@@ -54,3 +54,17 @@ TRUNCATE TABLE sante.transfertspatientscovid19;
 
 \COPY sante.transfertspatientscovid19(debut_transfert, fin_transfert, type_vecteur, region_depart, region_arrivee, pays_arrivee, nombre_patients_transferes) FROM '/home/mfu/Documents/Projets/coronavirus/data/sources_traitees/transferts-patients-covid19.csv'DELIMITER ',' CSV HEADER ENCODING 'utf8' NULL '';
 
+--- Schema : sante
+--- Table : niveauxexcesmortalitecovid19dep
+--- Traitement : Intégration csv niveauxexcesmortalitecovid19dep en base
+TRUNCATE TABLE sante.niveauxexcesmortalitecovid19dep;
+
+\COPY sante.niveauxexcesmortalitecovid19dep(dep, an_sem, clave_covid_dc65, cat_zscore) FROM '/home/mfu/Documents/Projets/coronavirus/data/sources_traitees/niveaux-exces-mortalite-covid19-dep.csv'DELIMITER ';' CSV HEADER ENCODING 'utf8' NULL '';
+
+--- Schema : sante
+--- Table : niveauxexcesmortalitecovid19reg
+--- Traitement : Intégration csv niveauxexcesmortalitecovid19reg en base
+TRUNCATE TABLE sante.niveauxexcesmortalitecovid19reg;
+
+\COPY sante.niveauxexcesmortalitecovid19reg(reg, an_sem, clave_covid_dc65, cat_zscore) FROM '/home/mfu/Documents/Projets/coronavirus/data/sources_traitees/niveaux-exces-mortalite-covid19-reg.csv'DELIMITER ';' CSV HEADER ENCODING 'utf8' NULL '';
+

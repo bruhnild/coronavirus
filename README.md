@@ -18,6 +18,12 @@ Se positionner à la racine du projet :
 $ conda create --name my_env python=3
 $ conda activate my_env
 ```
+
+- ajouter un nouveau kernel:
+
+```sh
+$ python -m ipykernel install --user --name my_env --display-name "Python (my_env)"
+```
 - installer les paquets suivants :
 
 ```sh
